@@ -1,272 +1,39 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion · Mon App</title>
-    <style>
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(145deg, #f6f9fc 0%, #e9f1f8 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        /* ===== CARTE DE CONNEXION ===== */
-        .login-card {
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 2rem;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 32, 64, 0.25),
-                inset 0 1px 2px rgba(255,255,255,0.8);
-            width: 100%;
-            max-width: 420px;
-            padding: 2.5rem 2rem;
-            border: 1px solid rgba(255,255,255,0.5);
-            transition: transform 0.2s ease;
-        }
-
-        .login-card:hover {
-            transform: scale(1.01);
-        }
-
-        /* ===== EN‑TÊTE ===== */
-        .login-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .login-header h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #1e3c5c, #2b5876);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.4rem;
-        }
-
-        .login-header p {
-            color: #4b6a88;
-            font-weight: 400;
-            font-size: 0.95rem;
-        }
-
-        /* ===== FORMULAIRE ===== */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #1e3c5c;
-            margin-bottom: 0.4rem;
-            letter-spacing: 0.3px;
-        }
-
-        .input-wrapper {
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 1.2rem;
-            padding: 0.2rem 1rem;
-            border: 1.5px solid #dce7f2;
-            transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-
-        .input-wrapper:hover {
-            border-color: #a0c0da;
-        }
-
-        .input-wrapper:focus-within {
-            border-color: #2b5876;
-            box-shadow: 0 0 0 4px rgba(43,88,118,0.15);
-        }
-
-        .input-wrapper span {
-            color: #5f7d9c;
-            font-size: 1.1rem;
-            margin-right: 0.6rem;
-        }
-
-        input {
-            width: 100%;
-            border: none;
-            padding: 0.9rem 0;
-            font-size: 1rem;
-            background: transparent;
-            color: #1e2f3e;
-            outline: none;
-        }
-
-        input::placeholder {
-            color: #b2c9de;
-            font-weight: 300;
-            font-size: 0.95rem;
-        }
-
-        /* ===== OPTIONS (se souvenir + mdp oublié) ===== */
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 1.8rem 0 2rem;
-            font-size: 0.9rem;
-        }
-
-        .remember {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #2b4b6e;
-            cursor: pointer;
-        }
-
-        .remember input[type="checkbox"] {
-            width: 1.1rem;
-            height: 1.1rem;
-            accent-color: #2b5876;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .forgot-link {
-            color: #2b5876;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 1px dotted transparent;
-            transition: border-color 0.2s;
-        }
-
-        .forgot-link:hover {
-            border-bottom-color: #2b5876;
-        }
-
-        /* ===== BOUTON ===== */
-        button {
-            width: 100%;
-            background: #1e3c5c;
-            border: none;
-            padding: 1rem;
-            border-radius: 3rem;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            cursor: pointer;
-            box-shadow: 0 8px 18px rgba(28, 58, 90, 0.3);
-            transition: all 0.2s;
-            border: 1px solid rgba(255,255,255,0.2);
-            margin-bottom: 1.8rem;
-        }
-
-        button:hover {
-            background: #2b5876;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(28, 58, 90, 0.4);
-        }
-
-        button:active {
-            transform: translateY(1px);
-            box-shadow: 0 5px 12px rgba(28, 58, 90, 0.3);
-        }
-
-        /* ===== LIEN D'INSCRIPTION ===== */
-        .signup-text {
-            text-align: center;
-            color: #4b6589;
-            font-size: 0.95rem;
-        }
-
-        .signup-text a {
-            color: #1e3c5c;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 1.5px solid transparent;
-            transition: border-color 0.2s;
-        }
-
-        .signup-text a:hover {
-            border-bottom-color: #1e3c5c;
-        }
-
-        /* ===== RESPONSIVE (petits écrans) ===== */
-        @media (max-width: 480px) {
-            .login-card {
-                padding: 2rem 1.5rem;
-            }
-            .login-header h1 {
-                font-size: 1.8rem;
-            }
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
-            }
-        }
-
-        /* icônes simples (personne, cadenas) — utilisent des entités HTML */
-    </style>
+    <meta http-equiv=“X-UA-Compatible” content=“ie=edge”>
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="login-card">
-        <div class="login-header">
-            <h1>📘 Connexion</h1>
-            <p>Accédez à votre espace personnel</p>
-        </div>
-
-        <form action="#" method="post">
-            <!-- Champ email / identifiant -->
-            <div class="form-group">
-                <label for="email">Email ou identifiant</label>
-                <div class="input-wrapper">
-                    <span>👤</span>
-                    <input type="email" id="email" name="email" placeholder="exemple@domaine.fr" required>
-                </div>
+    <div class="main">
+        <form action="">
+            <h1>Login</h1>
+            <div class="textbox">
+                <input type="text" placeholder="UserName" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="textbox">
+                <input type="password" placeholder="Password" required>
+                <i class='bx bxs-lock-alt'></i>
             </div>
 
-            <!-- Champ mot de passe -->
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <div class="input-wrapper">
-                    <span>🔒</span>
-                    <input type="password" id="password" name="password" placeholder="••••••••" required>
-                </div>
+            <div class="checkbox">
+                <label> <input type="checkbox"> Remember Me</label>
+                <a href="#">Forget Password</a>
             </div>
 
-            <!-- Options + bouton -->
-            <div class="form-options">
-                <label class="remember">
-                    <input type="checkbox" name="remember" checked>
-                    <span>Se souvenir de moi</span>
-                </label>
-                <a href="#" class="forgot-link">Mot de passe oublié ?</a>
-            </div>
-
-            <button type="submit">Se connecter</button>
-
-            <div class="signup-text">
-                Pas encore de compte ? <a href="#">Inscrivez‑vous</a>
+            <button class="button" type="submit"> Login</button>
+            <div class="register">
+                <p>Don't have an account ?
+                    <a href="#"> Register</a>
+                </p>
+                
             </div>
         </form>
     </div>
-
-    <!-- petite note : le formulaire ne soumet nulle part (action="#") -->
 </body>
 </html>
